@@ -30,7 +30,11 @@ namespace Underskaar.SudokuSolver
                     sets[2 * 9 + z]);
                 _positions[i] = position;
             }
+            if (sets.Any(s => s.InvalidDuplicates)) throw new ArgumentException("Invalid duplicates");
         }
+
+        public bool Unsolvable => _positions.Any(p => p.Unsolvable);
+        public bool HasSolution => _positions.All(p => p.Value > 0);
 
         public Position this[int index] => _positions[index];
 

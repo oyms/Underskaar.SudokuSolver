@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using static System.Linq.Enumerable;
 
 namespace Underskaar.SudokuSolver
 {
@@ -15,8 +13,8 @@ namespace Underskaar.SudokuSolver
 
         private static IEnumerable<PositionSet> GetSolutions(PositionSet positions)
         {
-            if (positions.Any(p => p.Unsolvable)) yield break;
-            if (positions.All(p => p.Value > 0)) yield return positions;
+            if (positions.Unsolvable) yield break;
+            if (positions.HasSolution) yield return positions;
             else
             {
                 var index = GetIndexOfBestCandidate(positions);

@@ -19,14 +19,25 @@ namespace Underskaar.SudokuSolver
             get
             {
                 return Enumerable.Range(1, (int)MaxValue)
-                    .Select(v=>(uint)v)
+                    .Select(v => (uint)v)
                     .Where(v => _positions.Select(p => p.Value).All(p => p != v));
+            }
+        }
+
+        public bool InvalidDuplicates
+        {
+            get
+            {
+                return Enumerable.Range(1, (int)MaxValue)
+                    .Select(v => (uint)v)
+                    .Select(v => _positions.Count(p => p.Value == v))
+                    .Any(c => c > 1);
             }
         }
 
         public override string ToString()
         {
-            return string.Join("",_positions.Select(p => p.ToString()));
+            return string.Join("", _positions.Select(p => p.ToString()));
         }
     }
 }
